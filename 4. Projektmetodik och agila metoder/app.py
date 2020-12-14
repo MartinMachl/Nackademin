@@ -1,15 +1,18 @@
+from utils.prompts import prompts
 from game_files.game import Game
-from data.database import database 
 
 """ Main module for application """
 
 
 def main():
-    game = Game()
-    game.start_game()
 
+    choice = prompts.new_or_load_game()
+    if choice == 'LOAD':
+        game = Game.load_game()
+        game.terminal_start_main()        
+    elif choice == 'NEW':
+        game = Game.new_character()
+        game.terminal_start_main()
 
 if __name__ == '__main__':
     main()
-
-
