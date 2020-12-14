@@ -5,9 +5,14 @@ class Combat:
         self.combatants = [entity for entity in combatants]
         self.turn_order = self.set_turn_order(self.combatants)
         self.turn_cycle = 0
+        self.total_turns = 0
+        entity, value = self.get_next_object_in_turn_order()
+        self.current_turn = entity
 
     def flee(self, entity):
         chance_to_flee = entity.get_agility() * 10
+        if entity.special_ability == 'Glow!':
+            chance_to_flee = 80
         return chance_to_flee
 
     def attack(self, attacker, defender):
@@ -33,6 +38,7 @@ class Combat:
         self.combatants.remove(entity[0])
 
     def get_next_object_in_turn_order(self):
+        self.total_turns += 1
         if self.turn_cycle >= len(self.turn_order):
             self.turn_cycle = 0
         entity, value = self.turn_order[self.turn_cycle]
@@ -44,39 +50,3 @@ class Combat:
         for _ in range(ability):
             tot += random.randint(1, 7)
         return(tot)
-
-# def a_demo_combat():
-#     test_enemies = [enemies.Orc(), characters.Knight(), enemies.Giant_spider()]
-#     combat = demo_combat.Combat(test_enemies)
-#     total_turn = 0
-#     for turn in range(0, 16):
-#         try:
-#             entity, value = combat.get_next_object_in_turn_order()
-#             total_turn += 1
-#             print(f"Turn {total_turn}: {entity} with starting value: {value}")
-#             # Player demo_loop
-#             if isinstance(entity, characters.Character):
-#                 print("KNIGHT ATTACK:")
-#                 for monster in combat.combatants:
-#                     if isinstance(monster, enemies.Enemy):
-#                         attack, defend = combat.attack(entity, monster)
-#                         print("ATTACK", attack, ". DEFEND", defend)
-#                         print("Dealth 1 damage to", monster)
-#             # Monster demo_loop
-#             if isinstance(entity, enemies.Enemy):
-#                 print(entity.get_name(), "ATTACK:")
-#                 for player in combat.combatants:
-#                     if isinstance(player, characters.Character):
-#                         attack, defend = combat.attack(entity, player)
-#                         print("ATTACK", attack, ". DEFEND", defend)
-#                         if attack > defend:
-#                             print("Dealth 1 damage to", player)
-#                         else:
-#                             print(player.get_name(), "DEFENDED AND TOOK NO DAMAGE")
-#         except Exception as e:
-#             print(e)
-#             pass
-#     ## DEMO END
-
-# a_demo_combat()
-

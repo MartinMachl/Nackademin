@@ -102,7 +102,6 @@ class GameMap:
         self.player_x = self.player_prev[1]
         self.player_y = self.player_prev[0]
 
-
     # Move the player
     def make_move(self, direction):
 
@@ -113,19 +112,23 @@ class GameMap:
 
         if self.check_bound(x, y):
             if self.check_if_exit(x, y):
-                self.map_grid[y][x].exit()
+                prev_x = self.player_x
+                prev_y = self.player_y
+                self.map_grid[prev_y][prev_x].set_state('X')
+                return self.map_grid[y][x].exit()
             else:
                 self.map_grid[self.player_prev[0]][self.player_prev[1]].set_room_cleared()
                 self.player_x = x
                 self.player_y = y
                 self.map_grid[y][x].set_state('X')
-
                 return self.get_room_at_grid()
         else:
             print("Not a position, you donkey!")
 
             return False
 
+    def parse_data(self, map_dict):
+        self.__dict__.update(map_dict)
 
 class Room:
     def __init__(self, name):
@@ -133,6 +136,7 @@ class Room:
         self.state = '-'
         self.description = ''
         self.content = {'enemies': [], 'treasures': []}
+        self.cleared = False
 
     # Retuns state of grid
     def get_room_state(self):
@@ -156,7 +160,14 @@ class Room:
 
     def set_room_cleared(self):
         self.set_state('O')
-        self.content = {}
+        self.cleared = True
+        self.content = {
+            'enemies':[],
+            'treasures':[]
+            }
+    
+    def parse_data(self, room_dict):
+        self.__dict__.update(room_dict)
 
 class EncounterRoom(Room):
     def __init__(self, name):
@@ -226,11 +237,7 @@ class ExitRoom(Room):
         self.state = 'E'
     
     def exit(self):
-        input_string = input('Do you want to exit the cave? ')
-        if input_string.lower() == 'yes':
-            # Save character
-            print("Congratulations you escaped!")
-        print("Do you want to exit? No ok then.")
+        return "exit"
 
 
 # Create map instance
@@ -245,32 +252,3 @@ def create_map_instance(index):
     playMap.create_map()
 
     return playMap
-
-
-# test methods
-'''
-playMap = GameMap(8, 8)
-playMap.create_map()
-playMap.set_start_position('t-r')
-playMap.print_map_grid()
-room00 = playMap.get_room_at_grid(0, 0)
-print(room00.get_room_name())
-print(room00.get_room_state())
-'''
-
-'''
-playRoom = Room("hej")
-playRoom.treasures_name()
-playRoom.enemies_name()
-'''
-# playMap = GameMap(8, 8)
-# playMap.create_map()
-# playMap.set_start_position('t-l')
-# input_dir = ''
-# while input_dir != 'A':
-#     input_dir = input("choose direction")
-#     print(playMap.make_move(input_dir))
-#     playMap.print_map_grid()
-#     print(playMap.get_room_at_grid().get_contents())
-
-
