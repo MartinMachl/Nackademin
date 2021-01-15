@@ -13,13 +13,13 @@ public class App {
         String data;
 
         // Create 7 boxers, to initially add objects when program is run.
-        catalog.add(new Boxer("Bosse", "Heavy Weight", 90.00, 75.00, 70.00));
-        catalog.add(new Boxer("Ivan", "Heavy Weight", 94.00, 72.00, 68.00));
-        catalog.add(new Boxer("Rocky", "Middle Weight", 82.00, 82.00, 76.00));
-        catalog.add(new Boxer("Holly", "Middle Weight", 80.00, 84.00, 79.00));
-        catalog.add(new Boxer("Marc", "Welter Weight", 77.00, 87.00, 85.00));
-        catalog.add(new Boxer("Ali", "Light Weight", 65.00, 94.00, 88.00));
-        catalog.add(new Boxer("Apollo", "Light Weight", 70.00, 90.00, 87.00));
+        catalog.add(new Boxer("Bosse", "Heavy Weight", 90.00, 75.00, 70.00, 2));
+        catalog.add(new Boxer("Ivan", "Heavy Weight", 94.00, 72.00, 68.00, 1));
+        catalog.add(new Boxer("Rocky", "Middle Weight", 82.00, 82.00, 76.00, 2));
+        catalog.add(new Boxer("Holly", "Middle Weight", 80.00, 84.00, 79.00, 3));
+        catalog.add(new Boxer("Marc", "Welter Weight", 77.00, 87.00, 85.00, 4));
+        catalog.add(new Boxer("Ali", "Light Weight", 65.00, 94.00, 88.00, 2));
+        catalog.add(new Boxer("Apollo", "Light Weight", 70.00, 90.00, 87.00, 1));
 
         System.out.println("\nWelcome to " + goldenGloves.name + " boxing gym");
 
@@ -126,7 +126,10 @@ public class App {
         System.out.print("Enter stamina (ex 25.00): ");
         double stamina = input.nextDouble();
 
-        catalog.add(new Boxer(name, weightClass, hitPower, speed, stamina));
+        System.out.print("Enter wins (ex 1): ");
+        int wins = input.nextInt();
+
+        catalog.add(new Boxer(name, weightClass, hitPower, speed, stamina, wins));
         System.out.println("Boxer added");
     }
 
@@ -188,7 +191,7 @@ public class App {
         // and the method fight is started
         names.clear();
         goldenGloves.makeFightcard(fighter1, fighter2, catalog);
-        goldenGloves.fight();
+        goldenGloves.fight(catalog);
     }
 
     static void data6(Scanner input, Gym goldenGloves, List<String> weights, List<Boxer> catalog,
@@ -237,6 +240,6 @@ public class App {
         // method fight is started, given criterias in method are met
         weights.clear();
         goldenGloves.getFightcard(weightClass, catalog);
-        goldenGloves.fight();
+        goldenGloves.fight(catalog);
     }
 }

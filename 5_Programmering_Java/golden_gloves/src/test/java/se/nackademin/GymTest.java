@@ -6,9 +6,9 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 
 public class GymTest {
-    Boxer x = new Boxer("testName", "Heavy Weight", 10, 20, 30);
-    Boxer y = new Boxer("testName2", "Welter Weight", 20, 30, 40);
-    Boxer z = new Boxer("testName3", "Heavy Weight", 15, 15, 15);
+    Boxer x = new Boxer("testName", "Heavy Weight", 10, 20, 30, 1);
+    Boxer y = new Boxer("testName2", "Welter Weight", 20, 30, 40, 1);
+    Boxer z = new Boxer("testName3", "Heavy Weight", 15, 15, 15, 1);
     Gym goldenGloves = new Gym("GoldenGloves");
     List<Boxer> catalog = new ArrayList<>();
     List<Boxer> fightcard = new ArrayList<>();

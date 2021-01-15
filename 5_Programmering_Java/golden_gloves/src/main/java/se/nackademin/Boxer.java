@@ -7,13 +7,15 @@ public class Boxer {
     double stamina;
     double speed;
     double stat;
+    int wins;
 
-    Boxer(String name, String weightClass, double hitPower, double speed, double stamina) {
+    Boxer(String name, String weightClass, double hitPower, double speed, double stamina, int wins) {
         this.name = name;
         this.weightClass = weightClass;
         this.hitPower = hitPower;
         this.speed = speed;
         this.stamina = stamina;
+        this.wins = wins;
     }
 
     public void setName(String name) {
@@ -54,6 +56,18 @@ public class Boxer {
 
     double getSpeed() {
         return speed;
+    }
+
+    int getWin() {
+        return wins;
+    }
+
+    public void setWin(int wins) {
+        this.wins = wins;
+    }
+
+    public void addWin() {
+        setWin(getWin() + 1);
     }
 
     // Makes a copy of an object to use in fight
