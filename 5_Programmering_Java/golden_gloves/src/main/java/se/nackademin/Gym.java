@@ -13,10 +13,10 @@ public class Gym {
     // this method takes a string argument and depending on what string
     // it will send the object to specified method
     public void printAll(List<Boxer> catalog) {
-        System.out.println(String.format("%n%-20s %-20s %-20s %-20s %-20s %-20s %n", "NAME", "WEIGHT CLASS", "HIT POWER", "SPEED", "STAMINA", "WINS"));
+        System.out.println(String.format("%n%-15s %-20s %-15s %-15s %-15s %-15s %n", "NAME", "WEIGHT CLASS", "HIT POWER", "SPEED", "STAMINA", "WINS"));
 
         // Looping through list of objects
-        catalog.stream().forEach(boxer -> System.out.println(String.format("%-20s %-20s %-20.2f %-20.2f %-20.2f %-20d",
+        catalog.stream().forEach(boxer -> System.out.println(String.format("%-15s %-20s %-15.2f %-15.2f %-15.2f %-15d",
                 boxer.name, boxer.weightClass, boxer.hitPower, boxer.speed, boxer.stamina, boxer.wins)));
     }
 

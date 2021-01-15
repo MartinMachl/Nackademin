@@ -106,8 +106,11 @@ public class App {
 
         String weightClass = "";
         boolean myTry2 = false;
+        System.out.println("Approved weight classes");
+        weightClasses.stream().forEach(weight -> System.out.print("\""+capitalizeWord(weight)+"\" "));
+        System.out.print("\n");
         while (!myTry2) {
-            System.out.print("Enter weight class (ex: \"Heavy Weight\", \"Middle Weight\", \"Light Weight\"): ");
+            System.out.print("Enter weight class: ");
             weightClass = input.nextLine().toLowerCase();
             if (weightClasses.contains(weightClass)) {
                 weightClass = capitalizeWord(weightClass);
