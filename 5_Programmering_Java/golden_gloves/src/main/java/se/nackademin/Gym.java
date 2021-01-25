@@ -13,11 +13,11 @@ public class Gym {
     // this method takes a string argument and depending on what string
     // it will send the object to specified method
     public void printAll(List<Boxer> catalog) {
-        System.out.println(String.format("%n%-20s %-20s %-20s %-20s %-20s %n", "NAME", "WEIGHT CLASS", "HIT POWER", "SPEED", "STAMINA"));
+        System.out.println(String.format("%n%-15s %-20s %-15s %-15s %-15s %-15s %n", "NAME", "WEIGHT CLASS", "HIT POWER", "SPEED", "STAMINA", "WINS"));
 
         // Looping through list of objects
-        catalog.stream().forEach(boxer -> System.out.println(String.format("%-20s %-20s %-20.2f %-20.2f %-20.2f",
-                boxer.name, boxer.weightClass, boxer.hitPower, boxer.speed, boxer.stamina)));
+        catalog.stream().forEach(boxer -> System.out.println(String.format("%-15s %-20s %-15.2f %-15.2f %-15.2f %-15d",
+                boxer.name, boxer.weightClass, boxer.hitPower, boxer.speed, boxer.stamina, boxer.wins)));
     }
 
     void train(String input, List<Boxer> catalog) {
@@ -57,7 +57,7 @@ public class Gym {
      */
     public void getFightcard(String input, List<Boxer> catalog) throws InterruptedException {
         for (Boxer boxer : catalog) {
-            Boxer tempBoxer = new Boxer("temp", "temp", 1.00, 1.00, 1.00);
+            Boxer tempBoxer = new Boxer("temp", "temp", 1.00, 1.00, 1.00, 1);
             (tempBoxer).copy(boxer);
 
             if (input.equalsIgnoreCase((tempBoxer).getWeight())) {
@@ -76,7 +76,7 @@ public class Gym {
      */
     public void makeFightcard(String fighter1, String fighter2, List<Boxer> catalog) throws InterruptedException {
         for (Boxer boxer : catalog) {
-            Boxer tempBoxer = new Boxer("temp", "temp", 1.00, 1.00, 1.00);
+            Boxer tempBoxer = new Boxer("temp", "temp", 1.00, 1.00, 1.00, 1);
             (tempBoxer).copy(boxer);
             if (fighter1.equalsIgnoreCase((tempBoxer).getName())) {
                 fightcard.add(tempBoxer);
@@ -122,7 +122,7 @@ public class Gym {
      * object with the highest double is printed out as winner. afterwards the list
      * is emptied and ready to be used again.
      */
-    public void fight() throws InterruptedException {
+    public void fight(List<Boxer> catalog) throws InterruptedException {
         // first we determin the correct weight class for the fight
         String weightClass = setWeightclass(fightcard);
 
@@ -149,6 +149,11 @@ public class Gym {
             System.out.println("The match was a tie!");
         } else {
             System.out.println((String.format("The winner is: %s", (fightcard.get(0)).getName())));
+            for (Boxer boxer : catalog) {
+                if (boxer.getName().equalsIgnoreCase((fightcard.get(0)).getName())) {
+                    boxer.addWin();
+                }
+            }
         }
 
         // the list fightcard is cleared to be used again to control duplicates

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 public class BoxerTest {
-    Boxer x = new Boxer("testName", "Heavy weight", 10, 20, 30);
-    Boxer y = new Boxer("secondName", "Middle weight", 40, 50, 60);
-    Boxer z = new Boxer("thirdTestName", "Light weight", 70, 80, 90);
+    Boxer x = new Boxer("testName", "Heavy weight", 10, 20, 30, 1);
+    Boxer y = new Boxer("secondName", "Middle weight", 40, 50, 60, 1);
+    Boxer z = new Boxer("thirdTestName", "Light weight", 70, 80, 90, 1);
 
     @Test
     void checkNameChanged() {
@@ -16,7 +16,7 @@ public class BoxerTest {
 
     @Test
     void checkIfObjectCopied() {
-        Boxer copiedObject = new Boxer("temp", "temp", 1.00, 1.00, 1.00);
+        Boxer copiedObject = new Boxer("temp", "temp", 1.00, 1.00, 1.00, 1);
         ((Boxer) copiedObject).copy((Boxer) x);
         assertEquals(10, copiedObject.hitPower);
     }

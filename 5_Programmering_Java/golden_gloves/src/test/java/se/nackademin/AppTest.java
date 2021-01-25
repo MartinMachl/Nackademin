@@ -6,7 +6,7 @@ import java.util.*;
 
 class AppTest {
     Gym goldenGloves = new Gym("GoldenGloves");
-    Boxer x = new Boxer("testName", "Heavy weight", 10, 20, 30);
+    Boxer x = new Boxer("testName", "Heavy weight", 10, 20, 30, 1);
     List<Boxer> catalog = new ArrayList<>();
     List<String> weightClasses = Arrays.asList("heavy weight", "cruiser weight", "middle weight", "light-heavy weight", "rooster weight", "light weight", "welter weight");
     List<String> names = new ArrayList<>();
@@ -24,13 +24,13 @@ class AppTest {
 
     @Test
     void isNotEmpty() {
-        catalog.add(new Boxer("first", "heavy weight", 60.00, 45.00, 90.00));
+        catalog.add(new Boxer("first", "heavy weight", 60.00, 45.00, 90.00, 1));
         assertFalse(catalog.isEmpty());
     }
 
     @Test
     void userHasName() {
-        catalog.add(new Boxer("first", "heavy weight", 60.00, 45.00, 90.00));
+        catalog.add(new Boxer("first", "heavy weight", 60.00, 45.00, 90.00, 1));
         assertFalse(catalog.isEmpty());
     }
 
